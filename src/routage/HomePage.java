@@ -68,28 +68,27 @@ public class HomePage extends JFrame{
 		setLayout(new BorderLayout());
 		setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		setBackground(Color.WHITE);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("./doc/image/route2.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("./images/route2.png"));
 		
 		
 				
 		/**************** CENTER : message et ImagePanel **********************/
 		
 		
-		ImagePanel pan = new ImagePanel(new ImageIcon("./doc/image/Computer-Netw.jpg").getImage());
-		JLabel lab=new JLabel("Veuillez choisir la méthode de construction de votre réseau : ", JLabel.CENTER);
+		ImagePanel pan = new ImagePanel(new ImageIcon("./images/Computer-Netw.jpg").getImage());
+		JLabel lab=new JLabel("Veuillez charger la configuration de votre réseau : ", JLabel.CENTER);
 		lab.setFont(new Font("Dialog", 1, 14));
-		lab.setForeground(Color.BLUE);
+		lab.setForeground(Color.BLACK);
 		pan.setBackground(Color.WHITE);
 		pan.setLayout(new BorderLayout());
 		pan.add(lab,BorderLayout.CENTER);
 		add(pan, BorderLayout.CENTER);
 		
-		
-		
+				
 		/******************* SOUTH-EAST : Button création à partir d'un fichier ****************/
 		JPanel pan1=new JPanel();
 			
-		file=new JButton("Construction a partir d'un fichier de type *.dgs ", new ImageIcon("./doc/image/fileopen.png"));
+		file=new JButton("Charger le fichier *.dgs ", new ImageIcon("./images/fileopen.png"));
 		file.addActionListener(new EcouteurBouton());
 		pan1.setLayout(new BorderLayout());
 		pan1.setBackground(Color.WHITE);
@@ -97,28 +96,17 @@ public class HomePage extends JFrame{
         add(pan1, BorderLayout.EAST);
 			
 		
-        /******************* SOUTH-WEST : Button création graphique ****************/
-        JPanel pan2=new JPanel();
-        
-		graphique=new JButton("Construction depuis une interface graphique ",new ImageIcon("./doc/image/networking.png"));
-		graphique.addActionListener(new EcouteurBouton());
-		pan2.setLayout(new BorderLayout());
-		pan2.setBackground(Color.WHITE);
-        pan2.add(graphique, BorderLayout.SOUTH);
-        add(pan2, BorderLayout.WEST);
-			
-		
 /*****************************Partie Menu******************************/
         
      // 01 Création des menus Items et de leurs raccourcis...
         
         aideItem = new JMenuItem("À Propos",KeyEvent.VK_A);
-        aideItem.setIcon(new ImageIcon("./doc/image/info.png"));
+        aideItem.setIcon(new ImageIcon("./images/info.png"));
         aideItem.setMnemonic('A');
         aideItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.ALT_MASK));
        
         quitItem = new JMenuItem("Quitter");
-        quitItem.setIcon(new ImageIcon("./doc/image/exit.png"));
+        quitItem.setIcon(new ImageIcon("./images/exit.png"));
             quitItem.setMnemonic('Q');
             quitItem.setAccelerator(KeyStroke.getKeyStroke("control Q"));
 
@@ -159,8 +147,7 @@ public class HomePage extends JFrame{
 					String string="<html><body> TP Réseaux-Routage : \n\n" +
 							"Implémentation en JAVA permettant de donner le chemin le plus  court dansune topologie réseau donnée.\n" +
 							"Le réseau est constitué de machines et de commutateurs avec plusieurs interfaces réseaux \n\n" +
-							"1. Le programme permet de saisir le graphe correspondant à la topologie réseau de deux manière \n " +
-							"différentes ( construction graphique ou à partir d'un fichier *.dgs).\n" +
+							"1. Le programme permet de saisir le graphe correspondant à la topologie réseau (à partir d'un fichier *.dgs).\n" +
 							"\n"+
 							"2. Le programme permet aussi de calculer les tables de routages de chauqe noeuds.Constr";
 					JOptionPane.showMessageDialog(null,string, "À propos",JOptionPane.INFORMATION_MESSAGE);

@@ -48,13 +48,11 @@ public class Visu extends JFrame {
 		
 		//creation du graph vide
 		reseau=new DefaultGraph("reseau");
-		//System.setProperty("gs.ui.renderer", "org.graphstream.ui.j2dviewer.J2DGraphRenderer");//Bibliothèque graphstream 1.1.1 permet d'afficher tout ce qui est icone des noeuds...
+		// System.setProperty("gs.ui.renderer", "org.graphstream.ui.j2dviewer.J2DGraphRenderer");//Bibliothèque graphstream 1.1.1 permet d'afficher tout ce qui est icone des noeuds...
 		reseau.addAttribute("ui.quality");
         reseau.addAttribute("ui.antialias");
         reseau.addAttribute("ui.stylesheet",
-          "edge { fill-color: grey; } node { size: 32px; fill-mode: image-scaled; fill-image: url('network.png'); }");
-    
-		
+          "edge { fill-color: grey; } node { size: 32px; fill-mode: image-scaled; fill-image: url('./images/network.png'); }");
 		//recupération des données concernant le reseau
 		try {
 			reseau.read(fichier.getPath());
@@ -106,11 +104,11 @@ public class Visu extends JFrame {
 		
 		JPanel panBas=new JPanel();
 		
-		calcul=new JButton("Calculer les tables de routage",new ImageIcon("./doc/image/table.png"));
+		calcul=new JButton("Calculer les tables de routage",new ImageIcon("./images/table.png"));
 		calcul.addActionListener(new EcouteurBouton());
 		panBas.add(calcul);
 		
-		raz=new JButton("Retour a l'état initial",new ImageIcon("./doc/image/back.png"));
+		raz=new JButton("Retour a l'état initial",new ImageIcon("./images/back.png"));
 		raz.addActionListener(new EcouteurBouton());
 		panBas.add(raz);
 		
@@ -158,11 +156,11 @@ public class Visu extends JFrame {
 				if(it.next().getLabel("type").equals("routeur"))
 					nbVoisin++;
 			
-			tableRoutage+="<table style='border-collapse: collapse;' ><tr align='center' border=1><th style='color:red;' border=1 colspan="+(nbVoisin+1)+">"+n.getId()+"</th></tr>";
+			tableRoutage+="<table style='border-collapse: collapse;' ><tr align='center' border=1><th style='color:vert;' border=1 colspan="+(nbVoisin+1)+">"+n.getId()+"</th></tr>";
 			//pour chaque pc a rejoindre
 			for(Node nOrdi:ordi){
 				tableRoutage+="<tr>";
-				tableRoutage+="<th style='color:bleu;' border=1>"+nOrdi+"</th>";
+				tableRoutage+="<th style='color:green;' border=1>"+nOrdi+"</th>";
 				
 
 				// calcul de la ligne

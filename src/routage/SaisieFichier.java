@@ -45,7 +45,7 @@ public class SaisieFichier extends JFrame {
 		setLayout(new BorderLayout());
 		setBackground(new Color(255,255,255));
 		setIconImage(Toolkit.getDefaultToolkit()
-				  .getImage("./doc/image/route2.png"));
+				  .getImage("./images/route2.png"));
 	
 				
 		/**************** HAUT **********************/
@@ -86,17 +86,17 @@ public class SaisieFichier extends JFrame {
 		/******************** BAS *********************/
 		JPanel panBas=new JPanel();
 		
-		select=new JButton("Selectionner un fichier",new ImageIcon("./doc/image/fileopen2.png"));
+		select=new JButton("Selectionner un fichier",new ImageIcon("./images/fileopen2.png"));
 		select.addActionListener(new EcouteurBouton());
 		panBas.add(select);
 		
 		
-		visualisation=new JButton("Visualiser",new ImageIcon("./doc/image/visu1.png"));
+		visualisation=new JButton("Visualiser",new ImageIcon("./images/visu1.png"));
 		visualisation.setEnabled(false);
 		visualisation.addActionListener(new EcouteurBouton());
 		panBas.add(visualisation);
 		
-		home=new JButton("Retour à la fenetre d'HomePage",new ImageIcon("./doc/image/back.png"));
+		home=new JButton("Retour à la fenetre d'HomePage",new ImageIcon("./images/back.png"));
 		home.addActionListener(new EcouteurBouton());
 		panBas.add(home);
 		

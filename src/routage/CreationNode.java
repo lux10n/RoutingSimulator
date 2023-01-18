@@ -111,7 +111,7 @@ public class CreationNode extends JDialog{
 					greseau.addAttribute("ui.quality");
 			        greseau.addAttribute("ui.antialias");
 			        greseau.addAttribute("ui.stylesheet",
-			            "edge { fill-color: grey; }","node { size: 32px; fill-mode: image-scaled; fill-image: url('./doc/image/network.png'); }");
+			            "edge { fill-color: grey; }","node { size: 32px; fill-mode: image-scaled; fill-image: url('./images/network.png'); }");
 				}
 				else{
 					greseau.getNode(idT).addAttribute("type", "routeur");

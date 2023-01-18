@@ -115,11 +115,11 @@ public class CreationLiaison extends JDialog{
 						greseau.addAttribute("ui.quality");
 				        greseau.addAttribute("ui.antialias");
 				        greseau.addAttribute("ui.stylesheet",
-				            "edge { fill-color: grey; }","node { size: 32px; fill-mode: image-scaled; fill-image: url('./doc/image/network.png'); }");	
+				            "edge { fill-color: grey; }","node { size: 32px; fill-mode: image-scaled; fill-image: url('./images/network.png'); }");	
 						Edge e1=greseau.addEdge(n1.getId()+n2.getId(), n1.getId(), n2.getId());
 						e1.addAttribute("label", poids.getText());
 						e1.addAttribute("poids", Integer.parseInt(poids.getText()));
-						e1.addAttribute("ui.stylesheet", "edge { fill-color: grey; } node { size: 32px; fill-mode: image-scaled; fill-image: url('network.png'); }");
+						e1.addAttribute("ui.stylesheet", "edge { fill-color: grey; } node { size: 32px; fill-mode: image-scaled; fill-image: url('./images/network.png'); }");
 										
 						
 						
