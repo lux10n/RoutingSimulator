@@ -18,8 +18,6 @@ import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.DefaultGraph;
 
 /**
- * Class permettant la creation des
- * composants du reseau (routeurs et terminals)
  * @author ADOU Michel
  *
  */
