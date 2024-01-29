@@ -34,8 +34,8 @@ public class CreationNode extends JDialog{
 
     /**
      * Constructeur de noeud
-     * @param gn objet de l'IHM parent, utile pour la modalite de la fenetre
-     * @param reseau graph qui soutient le reseau
+     * @param gn objet de l'IHM parent, utile pour la modalité de la fenêtre
+     * @param réseau graphe qui soutient le reseau
      */
 	
 	public CreationNode(GestionNode gn,DefaultGraph reseau) {
@@ -84,7 +84,7 @@ public class CreationNode extends JDialog{
 	}
 	
 	/**
-	 * Class permettant de géré la création d'un composant 
+	 * Class permettant de gérer la création d'un composant 
 	 * @author ADOU Michel
 	 *.addAttribute("xy", 1, 1)
 	 */
@@ -92,32 +92,30 @@ public class CreationNode extends JDialog{
 
 		public void actionPerformed(ActionEvent e) {
 			
-			//on recupere l'id et on supprime les espaces si il y en a
+			//on recupère l'id et on supprime les espaces si il y en a
 			String idT=id.getText().replaceAll(" ","");
 			
-			//verification de la unicité de l'id
+			//vérification de l'unicité de l'id
 			if(greseau.getNode(idT)==null){
 				
-				//l'id n'est pas deja present dans le reseau
+				//l'id n'est pas deja présent dans le reseau
 				greseau.addNode(idT).addAttribute("label", idT);
 				
 				//on regarde le type de composant 
-				// on ajoute en consequence les attributs
+				// on ajoute en conséquence les attributs
 				if(ordi.isSelected()){
 					
 					greseau.getNode(idT).addAttribute("type", "ordi");
 					greseau.addAttribute("ui.quality");
-			        greseau.addAttribute("ui.antialias");
-			        greseau.addAttribute("ui.stylesheet",
-			            "edge { fill-color: grey; }","node { size: 32px; fill-mode: image-scaled; fill-image: url('./images/network.png'); }");
-				}
-				else{
+				        greseau.addAttribute("ui.antialias");
+				        greseau.addAttribute("ui.stylesheet","edge { fill-color: grey; }","node { size: 32px; fill-mode: image-scaled; fill-image: url('./images/network.png'); }");
+				} else {
 					greseau.getNode(idT).addAttribute("type", "routeur");
 					greseau.getNode(idT).addAttribute("ui.style", "text-size:20px;");
 				}
 				
 				
-				//on ajoute a la liste le composant creer
+				//on ajoute a la liste le composant créé
 				gn.listNode.removeAll();
 				DefaultListModel listModel = new DefaultListModel();
 				String tmp;
@@ -128,17 +126,14 @@ public class CreationNode extends JDialog{
 				
 				gn.listNode.setModel(listModel);
 				
-				//fermeture de la fenetre
+				//fermeture de la fenêtre
 				CreationNode.this.dispose();
 				
-			}
-			else{
-				//l'id est deja present dans le reseau
+			} else {
+				//l'id est deja présent dans le réseau
 				JOptionPane.showMessageDialog(null, "l'id déjà present dans le reseau", "Help", JOptionPane.ERROR_MESSAGE);
 				id.setText("");
 			}
-			
 		}
 	}
-
 }
