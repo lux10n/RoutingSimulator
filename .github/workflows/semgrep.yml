@@ -38,3 +38,10 @@ jobs:
         with:
           name: semgrep-json-report-${{ env.SCAN_TAGNAME }}.json
           path: ${{ env.SCAN_TAGNAME }}.json
+
+      - name: Clone processing repo
+        run: git clone https://github.com/lux10n/semgrep2html.git
+
+      - name: Parse JSON Report
+        run: | 
+          python3 --version
