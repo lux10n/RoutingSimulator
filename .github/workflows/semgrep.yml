@@ -42,10 +42,8 @@ jobs:
       - name: Clone processing repo
         run: git clone https://github.com/lux10n/semgrep2html.git
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.13' 
+      - name: Setup python & pip
+        run: python -m ensurepip --default-pip
 
       - name : Parse JSON Report
         run: | 
