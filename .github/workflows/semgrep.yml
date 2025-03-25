@@ -50,7 +50,7 @@ jobs:
 
       - name: Fail if blocking issues exist
         run: |
-          BLOCKING_ISSUES=$(jq '[.results[] | select(.severity == "ERROR")] | length' ${{ env.SCAN_TAGNAME }}.json)
+          BLOCKING_ISSUES=$(jq '[.results[] | select(.extra.severity == "ERROR")] | length' ${{ env.SCAN_TAGNAME }}.json)
           if [ "$BLOCKING_ISSUES" -gt 0 ]; then
             echo "❌ Blocking issues detected! Failing the pipeline."
             exit 1
