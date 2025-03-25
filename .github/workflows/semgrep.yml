@@ -33,25 +33,27 @@ jobs:
       - name: Run scan
         run: semgrep scan --config auto --json-output ${{ env.SCAN_TAGNAME }}.json
 
-      - name: Archive JSON report
-        uses: actions/upload-artifact@v4
-        with:
-          name: semgrep-json-report-${{ env.SCAN_TAGNAME }}.json
-          path: ${{ env.SCAN_TAGNAME }}.json
-
-      - name: Clone processing repo
-        run: git clone https://github.com/lux10n/semgrep2html.git
-
       - name : Parse JSON Report
         run: | 
+          git clone https://github.com/lux10n/semgrep2html.git
           python -m venv env
           source env/bin/activate
           python -m ensurepip --default-pip
           pip install -r semgrep2html/requirements.txt
           python semgrep2html/parse-semgrep.py --input ${{ env.SCAN_TAGNAME }}.json --output ${{ env.SCAN_TAGNAME }}.html --project-name ${{ github.event.repository.name }}
 
-      - name: Archive HTML report
+      - name: Upload HTML report
         uses: actions/upload-artifact@v4
         with:
           name: semgrep-html-report-${{ env.SCAN_TAGNAME }}.html
           path: ${{ env.SCAN_TAGNAME }}.html
+
+      - name: Fail if blocking issues exist
+        run: |
+          BLOCKING_ISSUES=$(jq '[.results[] | select(.severity == "ERROR")] | length' ${{ env.SCAN_TAGNAME }}.json)
+          if [ "$BLOCKING_ISSUES" -gt 0 ]; then
+            echo "❌ Blocking issues detected! Failing the pipeline."
+            exit 1
+          else
+            echo "✅ No blocking issues found. Closing..."
+          fi
