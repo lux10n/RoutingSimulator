@@ -44,8 +44,9 @@ jobs:
 
       - name: Setup Python
         uses: actions/setup-python@v5
-          with:
-            python-version: '3.12'
+        with:
+          python-version: '3.13' 
+
       - name : Parse JSON Report
         run: | 
           pip install -r semgrep2html/requirements.txt
