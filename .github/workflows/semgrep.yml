@@ -42,11 +42,11 @@ jobs:
       - name: Clone processing repo
         run: git clone https://github.com/lux10n/semgrep2html.git
 
-      - name: Setup python & pip
-        run: python -m ensurepip --default-pip
-
       - name : Parse JSON Report
         run: | 
+          python -m venv env
+          source env/bin/activate
+          python -m ensurepip --default-pip
           pip install -r semgrep2html/requirements.txt
           python semgrep2html/parse-semgrep.py --input ${{ env.SCAN_TAGNAME }}.json --output ${{ env.SCAN_TAGNAME }}.html --project-name ${{ github.event.repository.name }}
 
