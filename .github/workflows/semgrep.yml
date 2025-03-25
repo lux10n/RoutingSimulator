@@ -32,17 +32,17 @@ jobs:
     if: (github.actor != 'dependabot[bot]')
 
     steps:
-      - name: Get current date
-        id: current-date
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+      - name: Get scan metadata
+        run: echo "SCAN_TIMESTAMP=$(date +'%Y-%m-%d-%H-%M-%S')" >> $GITHUB_ENV
+        run: echo "SCAN_TAGNAME=${{ github.event.repository.name }}-$SCAN_TIMESTAMP" >> $GITHUB_ENV
       - name: Checkout source
         # Fetch project source with GitHub Actions Checkout. Use either v3 or v4.
         uses: actions/checkout@v4
       - name: Run scan
         # Run the "semgrep scan" command on the command line of the docker image.
-        run: semgrep scan --config auto --json-output ${{ github.event.repository.name }}-${{ steps.current-date.outputs.date }}.json
+        run: semgrep scan --config auto --json-output $SCAN_TAGNAME.json
       - name: Archive scan JSON results
         uses: actions/upload-artifact@v4
         with:
-          name: semgrep-json-report-${{ steps.current-date.outputs.date }}.json
-          path: ${{ github.event.repository.name }}-${{ steps.current-date.outputs.date }}.json
+          name: semgrep-json-report-SCAN_TAGNAME.json
+          path: SCAN_TAGNAME.json
