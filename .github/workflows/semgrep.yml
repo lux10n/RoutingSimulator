@@ -45,7 +45,7 @@ jobs:
       - name: Upload HTML report
         uses: actions/upload-artifact@v4
         with:
-          name: semgrep-html-report-${{ env.SCAN_TAGNAME }}.html
+          name: ${{ env.SCAN_TAGNAME }}.html
           path: ${{ env.SCAN_TAGNAME }}.html
 
       - name: Fail if blocking issues exist
