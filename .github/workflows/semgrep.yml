@@ -26,8 +26,8 @@ jobs:
       - name: Generate scan metadata
         shell: bash
         run: |
-          echo "SCAN_TAGNAME=${{ github.event.repository.name }}-$(date +'%Y-%m-%d-%H-%M-%S')" >> $GITHUB_ENV
           echo "SCAN_BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
+          echo "SCAN_TAGNAME=${{ github.event.repository.name }}-${{ env.SCAN_BRANCH }}-$(date +'%Y-%m-%d-%H-%M-%S')" >> $GITHUB_ENV
 
       - name: Checkout source
         uses: actions/checkout@v4
