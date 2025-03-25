@@ -2,12 +2,10 @@
 name: Semgrep CE scan
 
 on:
-  pull_request: {}
-  workflow_dispatch: {}
-  push:
+  pull_request:
     branches: ["master", "main"]
   schedule:
-    - cron: '20 17 * * *' # Runs every day at 17:20 UTC.
+    - cron: '0 0 1,15 * *' # Runs every two weeks at 12AM.
 
 permissions:
   contents: read
