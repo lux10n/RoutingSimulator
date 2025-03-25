@@ -26,7 +26,7 @@ jobs:
       - name: Get scan metadata
         run: |
           echo "SCAN_TIMESTAMP=$(date +'%Y-%m-%d-%H-%M-%S')" >> $GITHUB_ENV
-          echo "SCAN_TAGNAME=${{ github.event.repository.name }}-$SCAN_TIMESTAMP" >> $GITHUB_ENV
+          echo "SCAN_TAGNAME=${{ github.event.repository.name }}-${{ env.SCAN_TIMESTAMP }}" >> $GITHUB_ENV
 
       - name: Checkout source
         uses: actions/checkout@v4
