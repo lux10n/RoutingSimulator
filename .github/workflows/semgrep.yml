@@ -23,11 +23,13 @@ jobs:
     if: (github.actor != 'dependabot[bot]')
 
     steps:
-      - name: Generate scan metadata
+      - name: Get branch name
         shell: bash
-        run: |
-          echo "SCAN_BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
-          echo "SCAN_TAGNAME=${{ github.event.repository.name }}-${{ env.SCAN_BRANCH }}-$(date +'%Y-%m-%d-%H-%M-%S')" >> $GITHUB_ENV
+        run: echo "SCAN_BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
+
+      - name: Get scan metadata
+        shell: bash
+        run: echo "SCAN_TAGNAME=${{ github.event.repository.name }}-${{ env.SCAN_BRANCH }}-$(date +'%Y-%m-%d-%H-%M-%S')" >> $GITHUB_ENV
 
       - name: Checkout source
         uses: actions/checkout@v4
