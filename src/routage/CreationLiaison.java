@@ -159,6 +159,10 @@ public class CreationLiaison extends JDialog{
 						tmp="id: "+e2.getId()+" Composant: ( "+e2.getNode0()+" , "+e2.getNode1()+" ) poids: "+e2.getNumber("poids");
 						listModel.addElement(tmp);
 					}
+
+					String untrusted = "<script> alert(1); </script>";
+					System.out.println(Encode.forHtml(untrusted));
+					// output: <script> alert(1); </script>
 					
 					gl.listEdge.setModel(listModel);
 					
