@@ -23,9 +23,11 @@ jobs:
     if: (github.actor != 'dependabot[bot]')
 
     steps:
-      - name: Get scan metadata
+      - name: Generate scan metadata
+        shell: bash
         run: |
           echo "SCAN_TAGNAME=${{ github.event.repository.name }}-$(date +'%Y-%m-%d-%H-%M-%S')" >> $GITHUB_ENV
+          echo "SCAN_BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
 
       - name: Checkout source
         uses: actions/checkout@v4
@@ -40,7 +42,7 @@ jobs:
           source env/bin/activate
           python -m ensurepip --default-pip
           pip install -r semgrep2html/requirements.txt
-          python semgrep2html/parse-semgrep.py --input ${{ env.SCAN_TAGNAME }}.json --output ${{ env.SCAN_TAGNAME }}.html --project-name ${{ github.event.repository.name }}
+          python semgrep2html/parse-semgrep.py --input ${{ env.SCAN_TAGNAME }}.json --output ${{ env.SCAN_TAGNAME }}.html --project-name ${{ github.event.repository.name }} --branch ${{ env.SCAN_BRANCH }}
 
       - name: Upload HTML report
         uses: actions/upload-artifact@v4
