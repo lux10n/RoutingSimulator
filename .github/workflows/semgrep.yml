@@ -42,17 +42,12 @@ jobs:
       - name: Clone processing repo
         run: git clone https://github.com/lux10n/semgrep2html.git
 
-      - name: Set up Python 3.12
-        uses: actions/setup-python@v2
+      - name: Parse JSON Report
+        uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-
-      - name: Install python dependencies
-        run: |
-          pip install -r semgrep2html/requirements.txt
-
-      - name: Parse JSON Report
         run: | 
+          pip install -r semgrep2html/requirements.txt
           python semgrep2html/parse-semgrep.py --input ${{ env.SCAN_TAGNAME }}.json --output ${{ env.SCAN_TAGNAME }}.html --project-name ${{ github.event.repository.name }}
 
       - name: Archive HTML report
