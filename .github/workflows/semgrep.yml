@@ -33,7 +33,7 @@ jobs:
       - name: Run scan
         run: semgrep scan --config auto --json-output ${{ env.SCAN_TAGNAME }}.json
 
-      - name: Archive scan JSON results
+      - name: Archive JSON report
         uses: actions/upload-artifact@v4
         with:
           name: semgrep-json-report-${{ env.SCAN_TAGNAME }}.json
@@ -44,4 +44,11 @@ jobs:
 
       - name: Parse JSON Report
         run: | 
-          python3 --version
+          python3 -m pip install -r semgrep2html/requirements.txt
+          python3 semgrep2html/parse-semgrep.py --input ${{ env.SCAN_TAGNAME }}.json --output ${{ env.SCAN_TAGNAME }}.html --project-name ${{ github.event.repository.name }}
+
+      - name: Archive HTML report
+        uses: actions/upload-artifact@v4
+        with:
+          name: semgrep-html-report-${{ env.SCAN_TAGNAME }}.html
+          path: ${{ env.SCAN_TAGNAME }}.html
